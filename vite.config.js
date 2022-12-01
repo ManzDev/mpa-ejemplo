@@ -5,6 +5,8 @@ const folderName = path.basename(process.cwd()) + "/";
 const mode = process.env.NODE_ENV === "production" ? "production" : "development";
 const base = mode === "production" && isGitHubPages ? "/" + folderName : "/";
 
+const PATH = path.join(__dirname, "/src/");
+
 export default defineConfig({
   root: "src",
   base,
@@ -14,8 +16,10 @@ export default defineConfig({
     outDir: "../dist",
     assetsDir: "./",
     rollupOptions: {
-      main: resolve(__dirname, "index.html"),
-      nested: resolve(__dirname, "nested/index.html")
+      input: {
+        main: resolve(PATH, "index.html"),
+        nested: resolve(PATH, "nested/index.html")
+      }
     }
   }
 });
